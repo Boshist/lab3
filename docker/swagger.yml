@@ -1,0 +1,173 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /shop:
+    get:
+      operationId: shop.read_all
+      tags:
+        - Shop
+      summary: Read the entire set of pets, sorted by name
+      description: Read the entire set of pets, sorted by name
+      responses:
+        200:
+          description: Successfully read set of pets
+          schema:
+            type: array
+            items:
+              properties:
+                pet_id:
+                  type: string
+                  description: Id of the pet
+                pet_name:
+                  type: string
+                  description: name of the pet
+                pet_species:
+                  type: string
+                  description: species of the pet
+                pet_price:
+                  type: string
+                  description: price of the pet
+
+    post:
+      operationId: shop.create
+      tags:
+        - Shop
+      summary: Create a pet
+      description: Create a new pet
+      parameters:
+        - name: pet
+          in: body
+          description: Pet to create
+          required: True
+          schema:
+            type: object
+            properties:
+                pet_name:
+                  type: string
+                  description: name of the pet
+                pet_species:
+                  type: string
+                  description: species of the pet
+                pet_price:
+                  type: string
+                  description: price of the pet
+      responses:
+        201:
+          description: Successfully created pet
+          schema:
+            properties:
+                pet_id:
+                  type: string
+                  description: Id of the pet
+                pet_name:
+                  type: string
+                  description: name of the pet
+                pet_species:
+                  type: string
+                  description: species of the pet
+                pet_price:
+                  type: string
+                  description: price of the pet
+
+  /shop/{pet_id}:
+    get:
+      operationId: shop.read_one
+      tags:
+        - Shop
+      summary: Read one pet
+      description: Read one pet
+      parameters:
+        - name: pet_id
+          in: path
+          description: Id of the pet to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read pet from the shop
+          schema:
+            type: object
+            properties:
+                pet_id:
+                  type: string
+                  description: Id of the pet
+                pet_name:
+                  type: string
+                  description: name of the pet
+                pet_species:
+                  type: string
+                  description: species of the pet
+                pet_price:
+                  type: string
+                  description: price of the pet
+
+    put:
+      operationId: shop.update
+      tags:
+        - Shop
+      summary: Update a pet
+      description: Update a pet
+      parameters:
+        - name: pet_id
+          in: path
+          description: Id of the pet to update
+          type: integer
+          required: True
+        - name: pet
+          in: body
+          schema:
+            type: object
+            properties:
+                pet_name:
+                  type: string
+                  description: name of the pet
+                pet_species:
+                  type: string
+                  description: species of the pet
+                pet_price:
+                  type: string
+                  description: price of the pet
+      responses:
+        200:
+          description: Successfully updated pet
+          schema:
+            properties:
+                pet_id:
+                  type: string
+                  description: Id of the pet
+                pet_name:
+                  type: string
+                  description: name of the pet
+                pet_species:
+                  type: string
+                  description: species of the pet
+                pet_price:
+                  type: string
+                  description: price of the pet
+
+    delete:
+      operationId: shop.delete
+      tags:
+        - Shop
+      summary: Delete a pet from the shop
+      description: Delete a pet
+      parameters:
+        - name: pet_id
+          in: path
+          type: integer
+          description: Id of the pet to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a pet
